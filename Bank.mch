@@ -1,5 +1,5 @@
 /* Bank
- * Author: Gaudiot
+ * Author: Gaudiot, Matheus Isidoro
  * Creation date: 17/08/2023
  */
 MACHINE
@@ -10,15 +10,27 @@ SETS
 VARIABLES
     ACCOUNTS
 INVARIANT
-    ACCOUNTS : CLIENTS --> INTEGER
+    ACCOUNTS : CLIENTS +-> INTEGER
 INITIALISATION
-    ACCOUNTS := CLIENTS * INTEGER
-    
+    ACCOUNTS := {}
+ 
 OPERATIONS
+    registration(client, amount) =
+    PRE
+        client : CLIENTS &
+        amount: INTEGER &
+        client /: dom(ACCOUNTS) &
+        amount > 0
+    THEN
+        ACCOUNTS := ACCOUNTS \/ {client |-> amount}
+    END;
+    
     withdraw(client, amount) = 
     PRE
         client: CLIENTS & 
-        amount: INTEGER & amount > 0 &
+        amount: INTEGER &
+        amount > 0 &
+        client : dom(ACCOUNTS) &
         ACCOUNTS(client) >= amount
     THEN
         ACCOUNTS := ACCOUNTS <+
@@ -30,7 +42,9 @@ OPERATIONS
     deposit(client, amount) =
     PRE
         client: CLIENTS &
-        amount: INTEGER & amount > 0
+        client : dom(ACCOUNTS) &
+        amount: INTEGER &
+        amount > 0
     THEN
         ACCOUNTS := ACCOUNTS <+
             {
@@ -40,8 +54,13 @@ OPERATIONS
     
     transfer(clientSender, clientReceiver, amount) =
     PRE
-        clientSender : CLIENTS & clientReceiver : CLIENTS &
-        amount: INTEGER & amount > 0 &
+        clientSender : CLIENTS &
+        clientReceiver : CLIENTS &
+        clientSender : dom(ACCOUNTS) &
+        clientReceiver : dom(ACCOUNTS) &
+        clientSender /= clientReceiver &
+        amount: INTEGER &
+        amount > 0 &
         ACCOUNTS(clientSender) >= amount
     THEN
         ACCOUNTS := ACCOUNTS <+
@@ -52,3 +71,4 @@ OPERATIONS
     END
 
 END
+
