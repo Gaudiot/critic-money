@@ -6,69 +6,63 @@ MACHINE
     Bank
     
 SETS
-    CLIENTS
+    CPFS
 VARIABLES
-    ACCOUNTS
+    CLIENTS
+    BALANCE
 INVARIANT
-    ACCOUNTS : CLIENTS +-> INTEGER
+    CLIENTS: POW(CPFS)
+    BALANCE : CLIENTS --> FLOAT
 INITIALISATION
-    ACCOUNTS := {}
+    CLIENTS := {}
+    BALANCE := {}
  
 OPERATIONS
-    registration(client, amount) =
+    registration(cpf, amount) =
     PRE
-        client : CLIENTS &
-        amount: INTEGER &
-        client /: dom(ACCOUNTS) &
-        amount > 0
+        cpf : CPFS & cpf /: CLIENTS &
+        amount: FLOAT & amount >= 0.0
     THEN
-        ACCOUNTS := ACCOUNTS \/ {client |-> amount}
+        BALANCE := BALANCE \/ {cpf |-> amount}
     END;
     
     withdraw(client, amount) = 
     PRE
         client: CLIENTS & 
-        amount: INTEGER &
-        amount > 0 &
-        client : dom(ACCOUNTS) &
-        ACCOUNTS(client) >= amount
+        amount: FLOAT & amount > 0 &
+        BALANCE(client) >= amount
     THEN
-        ACCOUNTS := ACCOUNTS <+
+        BALANCE := BALANCE <+
             {
-                client |-> ACCOUNTS(client) - amount
+                client |-> BALANCE(client) - amount
             }
     END;
     
     deposit(client, amount) =
     PRE
         client: CLIENTS &
-        client : dom(ACCOUNTS) &
+        client : dom(BALANCE) &
         amount: INTEGER &
         amount > 0
     THEN
-        ACCOUNTS := ACCOUNTS <+
+        BALANCE := BALANCE <+
             {
-                client |-> ACCOUNTS(client) + amount
+                client |-> BALANCE(client) + amount
             }
     END;
     
     transfer(clientSender, clientReceiver, amount) =
     PRE
-        clientSender : CLIENTS &
-        clientReceiver : CLIENTS &
-        clientSender : dom(ACCOUNTS) &
-        clientReceiver : dom(ACCOUNTS) &
+        clientSender : CLIENTS & clientReceiver : CLIENTS &
         clientSender /= clientReceiver &
-        amount: INTEGER &
-        amount > 0 &
-        ACCOUNTS(clientSender) >= amount
+        amount: INTEGER & amount > 0 &
+        BALANCE(clientSender) >= amount
     THEN
-        ACCOUNTS := ACCOUNTS <+
+        BALANCE := BALANCE <+
             {
-                clientSender |-> ACCOUNTS(clientSender) - amount,
-                clientReceiver |-> ACCOUNTS(clientReceiver) + amount
+                clientSender |-> BALANCE(clientSender) - amount,
+                clientReceiver |-> BALANCE(clientReceiver) + amount
             }
     END
 
 END
-
