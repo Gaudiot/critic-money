@@ -7,62 +7,79 @@ MACHINE
     
 SETS
     CPFS
+CONSTANTS
+    ACCOUNT
+    CPFS_REGISTERED
+PROPERTIES
+    ACCOUNT = struct(HOLDER : CPFS, dependents : POW(CPFS), balance : FLOAT)
+    CPFS_REGISTERED = {client | client : CPF & (# account . (account : CLIENTS & ( client = account'holder or client : account'dependents)))}
 VARIABLES
     CLIENTS
-    BALANCE
 INVARIANT
-    CLIENTS: POW(CPFS)
-    BALANCE : CLIENTS --> FLOAT
+    CLIENTS: POW(ACCOUNT)
 INITIALISATION
     CLIENTS := {}
-    BALANCE := {}
  
 OPERATIONS
-    registration(cpf, amount) =
+    register_new_account(cpf) =
     PRE
-        cpf : CPFS & cpf /: CLIENTS &
-        amount: FLOAT & amount >= 0.0
+        cpf : CPFS &
+        cpf :/ CPFS_REGISTERED
     THEN
-        BALANCE := BALANCE \/ {cpf |-> amount}
+        CLIENTS := CLIENTS \/ {rec(holder : cpf, dependents : {}, balance : 0)}
     END;
     
+    /*
+    TODO
+    - FAZER O CORPO DA FUNCAO
+    */
+    register_as_dependent(holder, cpf) =
+    PRE
+        holder : CPFS_REGISTERED &
+        cpf : CPFS &
+        cpf :/ CPFS_REGISTERED
+    THEN
+        CLIENTS := CLIENTS
+    END;
+    
+    /*
+    TODO
+    - GARANTIR QUE A CONTA TENHA SALDO SUFICIENTE
+    - FAZER O CORPO DA FUNCAO
+    */
     withdraw(client, amount) = 
     PRE
-        client: CLIENTS & 
-        amount: FLOAT & amount > 0 &
-        BALANCE(client) >= amount
+        client: CPFS_REGISTERED & 
+        amount: FLOAT & amount > 0 
     THEN
-        BALANCE := BALANCE <+
-            {
-                client |-> BALANCE(client) - amount
-            }
+    
     END;
     
+    /*
+    TODO
+    - FAZER O CORPO DA FUNCAO
+    */    
     deposit(client, amount) =
     PRE
-        client: CLIENTS &
-        client : dom(BALANCE) &
-        amount: INTEGER &
-        amount > 0
+        client: CPFS_REGISTERED &
+        amount: FLOAT & amount > 0
     THEN
-        BALANCE := BALANCE <+
-            {
-                client |-> BALANCE(client) + amount
-            }
+    
     END;
     
+    /*
+    TODO
+    - GARANTIR QUE A CONTA TENHA SALDO SUFICIENTE
+    - GARANTIR QUE O SENDER E RECEIVER NÃO SÃO DA MESMA CONTA
+    - FAZER O CORPO DA FUNCAO
+    */
     transfer(clientSender, clientReceiver, amount) =
     PRE
-        clientSender : CLIENTS & clientReceiver : CLIENTS &
+        clientSender : CPFS_REGISTERED & clientReceiver : CPFS_REGISTERED &
         clientSender /= clientReceiver &
-        amount: INTEGER & amount > 0 &
-        BALANCE(clientSender) >= amount
+        amount: FLOAT & amount > 0
     THEN
-        BALANCE := BALANCE <+
-            {
-                clientSender |-> BALANCE(clientSender) - amount,
-                clientReceiver |-> BALANCE(clientReceiver) + amount
-            }
+    
     END
 
 END
