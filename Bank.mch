@@ -1,9 +1,9 @@
-/* BankR
- * Author: 
+/* Bank
+ * Author: Matheus Batista e Victor Gaudiot
  * Creation date: 05/09/23
  */
 MACHINE
-    BankR
+    Bank
 SETS
     CPFS
 CONSTANTS
@@ -23,7 +23,8 @@ OPERATIONS
     register_new_account(cpf) =
     PRE
         cpf : CPFS &
-        cpf /: dom(CLIENTS) & cpf /: union({all_dependents | all_dependents : POW(CPFS) & (# cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))})
+        cpf /: dom(CLIENTS) &
+        cpf /: union({all_dependents | all_dependents : POW(CPFS) & (# cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))})
     THEN
         ANY XX WHERE
             XX : POW(CPFS) &
@@ -78,7 +79,6 @@ OPERATIONS
     
     deposit(client, amount) =
     PRE
-        client: CPFS &
         client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
         amount: REAL & amount > 0.0
     THEN
@@ -96,5 +96,19 @@ OPERATIONS
                     holder |-> XX
                 }
         END  
+    END;
+    
+    transfer(clientSender, clientReceiver, amount) =
+    PRE
+        clientSender: CPFS &
+        clientReceiver: CPFS &
+        clientSender : {cpf | cpf : CPFS & ((cpf: dom(CLIENTS) & clientReceiver /:(CLIENTS(cpf))'dependents) or (# cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
+        clientReceiver : {cpf | cpf : CPFS & ((cpf: dom(CLIENTS) & clientSender /:(CLIENTS(cpf))'dependents) or (# cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
+
+        clientSender /= clientReceiver &
+        amount: REAL & amount > 0.0
+    THEN
+        CLIENTS := CLIENTS
     END
 END
+
