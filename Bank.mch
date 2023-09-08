@@ -9,13 +9,13 @@ SETS
 CONSTANTS
     ACCOUNT
 PROPERTIES
-    ACCOUNT = struct(dependents: POW(CPFS), balance : REAL)
+    ACCOUNT = struct(dependents: FIN(CPFS), balance : REAL)
 VARIABLES
     CLIENTS    
 INVARIANT
     CLIENTS: CPFS +-> ACCOUNT &
     (! cpf . (cpf: dom(CLIENTS) => (CLIENTS(cpf))'balance >= 0.0)) &
-    (! cpf . (cpf : dom(CLIENTS) => ( not( # cpf_ . ( cpf_ : dom(CLIENTS) & cpf /= cpf_ & cpf : (CLIENTS(cpf_))'dependents ) ) ) ) )
+    (! cpf . (cpf : dom(CLIENTS) => ( not( # cpf_ . ( cpf_ : dom(CLIENTS) & cpf : (CLIENTS(cpf_))'dependents ) ) ) ) )
     
 INITIALISATION
     CLIENTS := {}
@@ -27,12 +27,12 @@ OPERATIONS
         cpf /: dom(CLIENTS) &
         cpf /: union(
             { 
-                all_dependents | all_dependents : POW(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
+                all_dependents | all_dependents : FIN(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
             }
         )
     THEN
         ANY XX WHERE
-            XX : POW(CPFS) &
+            XX : FIN(CPFS) &
             XX = {} 
         THEN
             CLIENTS := CLIENTS <+
@@ -49,17 +49,23 @@ OPERATIONS
         dependent /: dom(CLIENTS) &
         dependent /: union(
             { 
-                all_dependents | all_dependents : POW(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
+                all_dependents | all_dependents : FIN(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
             }
         )
     THEN
-        CLIENTS := CLIENTS <+
-            {
+        ANY XX, YY WHERE
+            XX : FIN(CPFS) &
+            YY : REAL &
+            XX = (CLIENTS(holder))'dependents \/ {dependent} &
+            YY = (CLIENTS(holder))'balance
+        THEN
+            CLIENTS := CLIENTS <+ {
                 holder |-> rec(
-                    dependents: (CLIENTS(holder))'dependents \/ {dependent},
-                    balance: (CLIENTS(holder))'balance
+                    dependents: XX,
+                    balance: YY
                 )
             }
+        END
     END; 
     
     withdraw(client, amount) =
@@ -68,15 +74,18 @@ OPERATIONS
         client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
         amount: REAL & amount > 0.0
     THEN
-        ANY holder WHERE
-            holder: {cpf | cpf: dom(CLIENTS) & (client = cpf or client: (CLIENTS(cpf))'dependents)}
-            
+        ANY holder, XX, YY WHERE
+            holder: {cpf | cpf: dom(CLIENTS) & (client = cpf or client: (CLIENTS(cpf))'dependents)} &
+            XX : FIN(CPFS) &
+            XX = (CLIENTS(holder))'dependents &
+            YY : REAL &
+            YY = (CLIENTS(holder))'balance - amount
         THEN   
             CLIENTS := CLIENTS <+ 
                 {
                     holder |-> rec(
-                        dependents: (CLIENTS(holder))'dependents,
-                        balance: (CLIENTS(holder))'balance - amount
+                        dependents: XX,
+                        balance: YY
                     )
                 }
         END         
@@ -88,15 +97,18 @@ OPERATIONS
         client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
         amount: REAL & amount > 0.0
     THEN
-        ANY holder WHERE
-            holder: {cpf | cpf: dom(CLIENTS) & (client = cpf or client: (CLIENTS(cpf))'dependents)}
-            
+        ANY holder, XX, YY WHERE
+            holder: {cpf | cpf: dom(CLIENTS) & (client = cpf or client: (CLIENTS(cpf))'dependents)} &
+            XX : FIN(CPFS) &
+            XX = (CLIENTS(holder))'dependents &
+            YY : REAL &
+            YY = (CLIENTS(holder))'balance + amount
         THEN   
             CLIENTS := CLIENTS <+ 
                 {
                     holder |-> rec(
-                        dependents: (CLIENTS(holder))'dependents,
-                        balance: (CLIENTS(holder))'balance + amount
+                        dependents: XX,
+                        balance: YY
                     )
                 }
         END  
@@ -105,26 +117,26 @@ OPERATIONS
     transfer(clientSender, clientReceiver, amount) =
     PRE
         clientSender: CPFS & clientReceiver: CPFS &
-        card({holder | holder: dom(CLIENTS) & ((clientSender = holder or clientReceiver = holder) or (clientSender: (CLIENTS(holder))'dependents or clientSender: (CLIENTS(holder))'dependents))}) = 2 &
         clientSender /= clientReceiver &
+        card({holder | holder: dom(CLIENTS) & ((clientSender = holder or clientReceiver = holder) or (clientSender: (CLIENTS(holder))'dependents or clientSender: (CLIENTS(holder))'dependents))}) = 2 &
         amount: REAL & amount > 0.0 &
         (# holder . (holder: dom(CLIENTS) & (clientSender = holder or clientSender: (CLIENTS(holder))'dependents) & (CLIENTS(holder))'balance >= amount))
     THEN
-        ANY holderSender, holderReceiver WHERE
+        ANY holderSender, holderReceiver, XX, YY WHERE
             holderSender: {holder | holder: dom(CLIENTS) & (clientSender = holder or clientSender: (CLIENTS(holder))'dependents)} &
-            holderReceiver: {holder | holder: dom(CLIENTS) & (clientReceiver = holder or clientReceiver: (CLIENTS(holder))'dependents)}
+            holderReceiver: {holder | holder: dom(CLIENTS) & (clientReceiver = holder or clientReceiver: (CLIENTS(holder))'dependents)} &
+            holderSender /= holderReceiver &
+            XX : ACCOUNT &
+            YY : ACCOUNT &
+            XX = rec( dependents: (CLIENTS(holderSender))'dependents, balance: (CLIENTS(holderSender))'balance - amount ) &
+            YY = rec( dependents: (CLIENTS(holderReceiver))'dependents, balance: (CLIENTS(holderReceiver))'balance + amount )
         THEN   
             CLIENTS := CLIENTS <+ 
                 {
-                    holderSender |-> rec(
-                        dependents: (CLIENTS(holderSender))'dependents,
-                        balance: (CLIENTS(holderSender))'balance - amount
-                    ),
-                    holderReceiver |-> rec(
-                        dependents: (CLIENTS(holderReceiver))'dependents,
-                        balance: (CLIENTS(holderReceiver))'balance + amount
-                    )
+                    holderSender |-> XX,
+                    holderReceiver |-> YY
                 }
         END
     END
 END
+
