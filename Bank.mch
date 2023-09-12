@@ -72,7 +72,8 @@ OPERATIONS
     PRE
         client: CPFS &
         client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))} &
-        amount: REAL & amount > 0.0
+        amount: REAL & amount > 0.0 &
+        (# holder . (holder: dom(CLIENTS) & (client = holder or client: (CLIENTS(holder))'dependents) & (CLIENTS(holder))'balance >= amount))
     THEN
         ANY holder, XX, YY WHERE
             holder: {cpf | cpf: dom(CLIENTS) & (client = cpf or client: (CLIENTS(cpf))'dependents)} &
