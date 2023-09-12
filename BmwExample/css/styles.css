@@ -1,0 +1,16 @@
+.table {
+  width: 500px;
+  margin: 15px;
+}
+.disabled {
+  color: lightgray;
+}
+table td:nth-child(3) {
+  cursor: pointer;
+}
+.activated {
+  color: green;
+}
+.deactivated {
+  color: red;
+}

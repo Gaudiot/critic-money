@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>BMotion Studio for ProB</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="css/xeditable.css" type="text/css" />
+  <link rel="stylesheet" href="css/styles.css" type="text/css" />
+</head>
+
+<body>
+
+  <script src="js/bms.api.js"></script>
+  <script src="js/jquery-1.12.0.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/xeditable.js"></script>
+  <script src="js/script.js"></script>
+
+  <div data-bms-svg="visualization.svg"></div>
+  <table class="table" ng-controller="pCtrl">
+    <tr>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Active</th>
+    </tr>
+    <tr ng-repeat="el in db">
+      <td>
+        {{el[0]}}
+      </td>
+      <td>
+        <span editable-text="el[1]" onaftersave="update(el[0], $data)">
+          {{el[1]}}
+        </span>
+      </td>
+      <td>
+        <span id="toggle({{el[0]}})" execute-event name="toggle" predicate='name="{{el[0]}}"' ng-class="isActive(el[0]) ? 'glyphicon glyphicon-ok activated' : 'glyphicon glyphicon-remove deactivated'"></span>
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

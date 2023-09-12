@@ -1,0 +1,40 @@
+{
+    "observers": [
+        {
+            "type": "formula",
+            "data": {
+                "formulas": [
+                    "lock"
+                ],
+                "cause": "AnimationChanged",
+                "trigger": "origin.prop(\"checked\", values[0]);\n",
+                "selector": "#lock",
+                "translate": true
+            }
+        },
+        {
+            "type": "formula",
+            "data": {
+                "formulas": [
+                    "lock"
+                ],
+                "cause": "AnimationChanged",
+                "trigger": "if(values[0]) {\n  origin.addClass(\"disabled\");\n} else {\n  origin.removeClass(\"disabled\");\n}",
+                "selector": "#bt_add",
+                "translate": true
+            }
+        },
+        {
+            "type": "formula",
+            "data": {
+                "formulas": [
+                    "lock"
+                ],
+                "cause": "AnimationChanged",
+                "trigger": "origin.prop('disabled', values[0]);",
+                "selector": "#name,#nr,#bt_add",
+                "translate": true
+            }
+        }
+    ]
+}

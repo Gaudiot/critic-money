@@ -1,0 +1,13 @@
+{
+    "model": "model/phonebook.mch",
+    "id": "phonebook",
+    "name": "Interactive Phonebook",
+    "observers": "phonebook.observers.json",
+    "events": "phonebook.events.json",
+    "autoOpen": [
+	"UserInteractions",
+        "Events",
+        "StateInspector"
+    ],
+    "template": "index.html"
+}
