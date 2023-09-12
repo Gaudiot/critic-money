@@ -1,6 +1,24 @@
 {
     "events": [
-        {
+      {
+        "type": "executeEvent",
+        "data": {
+            "events": [
+                {
+                    "name": "signup",
+                    "predicate": "var name = container.find(\"#name\");\nvar nr = container.find(\"#nr\"); \nreturn \"name = \" + name.val() + \" & nr = \" + nr.val();",
+                    "predicateJs": true
+                }
+            ],
+            "tooltip": true,
+            "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+            "callback": "alert(data.predicate + \" successfully added to bank!\");",
+            "selector": "#create_btn"
+        }
+      },
+
+
+      {
             "type": "executeEvent",
             "data": {
                 "events": [

@@ -1,92 +1,92 @@
 <svg width="1386" height="251" xmlns="http://www.w3.org/2000/svg">
  <g>
   <title>Layer 1</title>
-  <g stroke="null" id="svg_15">
-   <rect stroke="null" fill="none" id="canvas_background" height="253" width="1276.99998" y="-1" x="-1"/>
+  <g id="svg_15" stroke="null">
+   <rect x="-1" y="-1" width="1388" height="253" id="canvas_background" fill="none" stroke="null"/>
   </g>
   <g id="svg_18">
-   <rect fill="#f4f4f4" x="14.99998" y="10.5" width="1247.00001" height="232.00002" id="svg_28" rx="5" stroke="black"/>
-   <rect fill="#e5e5e5" x="29" y="65" width="225.00001" height="165" id="svg_5" rx="5" stroke="black"/>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_1" y="130.75" x="55.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000000" fill="#000000">CPF:</text>
-   <g data-bms-widget="iinput" data-placeholder="Enter CPF..." data-btype="STRING" id="cpf_signup">
-    <rect id="svg_6" x="86" y="114.25" width="125" height="25" fill="white" stroke="black"/>
-    <text id="svg_7" x="88" y="132.25" fill="lightgray">Enter CPF...</text>
+   <rect stroke="black" rx="5" id="svg_28" height="232.00002" width="1247.00001" y="10.5" x="14.99998" fill="#f4f4f4"/>
+   <rect stroke="black" rx="5" id="svg_5" height="165" width="225.00001" y="65" x="29" fill="#e5e5e5"/>
+   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="55.5" y="130.75" id="svg_1" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">CPF:</text>
+   <g id="cpf_signup" data-btype="STRING" data-placeholder="Enter CPF..." data-bms-widget="iinput">
+    <rect stroke="black" fill="white" height="25" width="125" y="114.25" x="86" id="svg_6"/>
+    <text fill="lightgray" y="132.25" x="88" id="svg_7">Enter CPF...</text>
    </g>
-   <g id="bt_add" data-text="Create Account" data-bms-widget="ibutton">
-    <rect stroke="black" fill="#ededed" height="25" width="126" y="191.5" x="78.50001" id="svg_3"/>
-    <text fill="black" y="209.5" x="93.50001" id="svg_4">Create Account</text>
+   <g data-bms-widget="ibutton" data-text="Create Account" id="create_btn">
+    <rect id="svg_3" x="78.50001" y="191.5" width="126" height="25" fill="#ededed" stroke="black"/>
+    <text id="svg_4" x="93.50001" y="209.5" fill="black">Create Account</text>
    </g>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_11" y="100" x="65.4922" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">New Account</text>
-   <rect stroke="black" fill="#e5e5e5" x="268" y="65" width="235.00001" height="165" id="svg_10" rx="5"/>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_12" y="100" x="295.49219" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">New Dependent</text>
-   <g data-bms-widget="iinput" data-placeholder="Enter CPF holder..." data-btype="STRING" id="cpf_holder_nd">
-    <rect id="svg_13" x="324" y="114.25" width="180" height="25" fill="white" stroke="black"/>
-    <text id="svg_14" x="326" y="132.25" fill="lightgray">Enter CPF holder...</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="65.4922" y="100" id="svg_11" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">New Account</text>
+   <rect rx="5" id="svg_10" height="165" width="235.00001" y="65" x="268" fill="#e5e5e5" stroke="black"/>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="295.49219" y="100" id="svg_12" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">New Dependent</text>
+   <g id="cpf_holder_nd" data-btype="STRING" data-placeholder="Enter CPF holder..." data-bms-widget="iinput">
+    <rect stroke="black" fill="white" height="25" width="180" y="114.25" x="324" id="svg_13"/>
+    <text fill="lightgray" y="132.25" x="326" id="svg_14">Enter CPF holder...</text>
    </g>
-   <g id="bt_search" data-text="Add dependent" data-bms-widget="ibutton">
-    <rect stroke="black" fill="#ededed" height="25" width="180" y="191.5" x="299" id="svg_16"/>
-    <text fill="black" y="209.5" x="341" id="svg_17">Add dependent</text>
+   <g data-bms-widget="ibutton" data-text="Add dependent" id="dependent_btn">
+    <rect id="svg_16" x="299" y="191.5" width="180" height="25" fill="#ededed" stroke="black"/>
+    <text id="svg_17" x="341" y="209.5" fill="black">Add dependent</text>
    </g>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_29" y="46" x="36.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">Bank Application</text>
-   <g data-bms-widget="iinput" data-placeholder="Enter CPF dependent..." id="cpf_dependent_nd">
-    <rect id="svg_8" x="324" y="151.5" width="164" height="25" fill="white" stroke="black"/>
-    <text id="svg_9" x="326" y="169.5" fill="lightgray">Enter CPF dependent...</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="36.5" y="46" id="svg_29" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Bank Application</text>
+   <g id="cpf_dependent_nd" data-placeholder="Enter CPF dependent..." data-bms-widget="iinput">
+    <rect stroke="black" fill="white" height="25" width="164" y="151.5" x="324" id="svg_8"/>
+    <text fill="lightgray" y="169.5" x="326" id="svg_9">Enter CPF dependent...</text>
    </g>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_3" y="130.75" x="279.8125" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000000" fill="#000000">Holder:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_24" y="168" x="273.8125" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="#000000" fill="#000000">Dependent:</text>
-   <rect stroke="black" fill="#e5e5e5" x="517" y="65" width="235.00001" height="165" id="svg_20" rx="5"/>
-   <rect stroke="black" fill="#e5e5e5" x="766" y="65" width="235.00001" height="165" id="svg_21" rx="5"/>
-   <rect stroke="black" fill="#e5e5e5" x="1015" y="65" width="235.00001" height="165" id="svg_22" rx="5"/>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_23" y="101" x="590.50781" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">Deposit</text>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_25" y="100" x="829.51563" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">Withdraw</text>
-   <text font-weight="bold" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_26" y="102" x="1084.48438" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">Transfer</text>
-   <g y="110" x="582.5" height="12" width="105" id="svg_2" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="114.25" x="584.5"/>
-    <text fill="lightgray" y="132.25" x="586.5">Placeholder</text>
+   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="279.8125" y="130.75" id="svg_3" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">Holder:</text>
+   <text fill="#000000" stroke="#000000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="273.8125" y="168" id="svg_24" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">Dependent:</text>
+   <rect rx="5" id="svg_20" height="165" width="235.00001" y="65" x="517" fill="#e5e5e5" stroke="black"/>
+   <rect rx="5" id="svg_21" height="165" width="235.00001" y="65" x="766" fill="#e5e5e5" stroke="black"/>
+   <rect rx="5" id="svg_22" height="165" width="235.00001" y="65" x="1015" fill="#e5e5e5" stroke="black"/>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="590.50781" y="101" id="svg_23" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Deposit</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="829.51563" y="100" id="svg_25" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Withdraw</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="1084.48438" y="102" id="svg_26" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Transfer</text>
+   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." id="cpf_deposit">
+    <rect id="svg_19" x="584.5" y="114.25" width="124" height="25" fill="white" stroke="black"/>
+    <text id="svg_27" x="586.5" y="132.25" fill="lightgray">Enter CPF here...</text>
    </g>
-   <g height="25" width="100" id="svg_31" data-text="Deposit money" data-bms-widget="ibutton">
-    <rect stroke="black" fill="#ededed" height="25" width="114" y="192" x="577.5"/>
-    <text fill="black" y="210" x="587.5">Deposit money</text>
+   <g data-bms-widget="ibutton" data-text="Deposit money" id="deposit_btn">
+    <rect id="svg_30" x="577.5" y="192" width="114" height="25" fill="#ededed" stroke="black"/>
+    <text id="svg_42" x="587.5" y="210" fill="black">Deposit money</text>
    </g>
-   <g height="25" width="100" id="svg_32" data-text="Withdraw money" data-bms-widget="ibutton">
-    <rect stroke="black" fill="#ededed" height="25" width="124" y="192" x="821.5"/>
-    <text fill="black" y="210" x="831.5">Withdraw money</text>
+   <g data-bms-widget="ibutton" data-text="Withdraw money" id="withdraw_btn">
+    <rect id="svg_48" x="821.5" y="192" width="124" height="25" fill="#ededed" stroke="black"/>
+    <text id="svg_49" x="831.5" y="210" fill="black">Withdraw money</text>
    </g>
-   <g height="25" width="100" id="svg_33" data-text="Transfer money" data-bms-widget="ibutton">
-    <rect stroke="black" fill="#ededed" height="25" width="119" y="199" x="1073"/>
-    <text fill="black" y="217" x="1083">Transfer money</text>
+   <g data-bms-widget="ibutton" data-text="Transfer money" id="transfer_btn">
+    <rect id="svg_50" x="1073" y="199" width="119" height="25" fill="#ededed" stroke="black"/>
+    <text id="svg_51" x="1083" y="217" fill="black">Transfer money</text>
    </g>
-   <g height="25" width="100" id="svg_34" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="151.5" x="584.5"/>
-    <text fill="lightgray" y="169.5" x="586.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Amount..." data-btype="INTEGER" id="amount_deposit">
+    <rect id="svg_52" x="584.5" y="151.5" width="100" height="25" fill="white" stroke="black"/>
+    <text id="svg_53" x="586.5" y="169.5" fill="lightgray">Amount...</text>
    </g>
-   <g height="25" width="100" id="svg_35" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="114.25" x="833.5"/>
-    <text fill="lightgray" y="132.25" x="835.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." data-btype="INTEGER" id="account_withdraw">
+    <rect id="svg_54" x="833.5" y="114.25" width="124" height="25" fill="white" stroke="black"/>
+    <text id="svg_55" x="835.5" y="132.25" fill="lightgray">Enter CPF here...</text>
    </g>
-   <g height="25" width="100" id="svg_36" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="151.5" x="833.5"/>
-    <text fill="lightgray" y="169.5" x="835.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Amount..." data-btype="INTEGER" id="amount_withdraw">
+    <rect id="svg_56" x="833.5" y="151.5" width="100" height="25" fill="white" stroke="black"/>
+    <text id="svg_57" x="835.5" y="169.5" fill="lightgray">Amount...</text>
    </g>
-   <g height="25" width="100" id="svg_37" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="114.25" x="1090.5"/>
-    <text fill="lightgray" y="132.25" x="1092.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="from_transfer">
+    <rect id="svg_58" x="1086.9944" y="104.24902" width="100" height="25" fill="white" stroke="black"/>
+    <text id="svg_59" x="1088.9944" y="122.24902" fill="lightgray">Placeholder</text>
    </g>
-   <g height="25" width="100" id="svg_38" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="151.5" x="1084.5"/>
-    <text fill="lightgray" y="169.5" x="1086.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="to_transfer">
+    <rect id="svg_60" x="1086.99449" y="135.74873" width="100" height="25" fill="white" stroke="black"/>
+    <text id="svg_61" x="1088.99449" y="153.74873" fill="lightgray">Placeholder</text>
    </g>
-   <g height="25" width="100" id="svg_39" data-btype="INTEGER" data-placeholder="Placeholder" data-bms-widget="iinput">
-    <rect stroke="black" fill="white" height="25" width="100" y="153" x="1201.5"/>
-    <text fill="lightgray" y="171" x="1203.5">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="amount_transfer">
+    <rect id="svg_62" x="1086.99445" y="167.00137" width="100" height="25" fill="white" stroke="black"/>
+    <text id="svg_63" x="1088.99445" y="185.00137" fill="lightgray">Placeholder</text>
    </g>
-   <text stroke="null" xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_40" y="130.75" x="532.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" fill="#000000">account:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_41" y="168" x="534.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">amount:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_43" y="130.75" x="783.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">account:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_44" y="168" x="784.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">amount:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_45" y="130.75" x="1040.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">from:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_46" y="168" x="1038.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">to:</text>
-   <text xml:space="preserve" text-anchor="left" font-family="Helvetica, Arial, sans-serif" font-size="12" id="svg_47" y="183" x="1026.5" fill-opacity="null" stroke-opacity="null" stroke-width="0" stroke="black" fill="#000000">amount:</text>
+   <text fill="#000000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="532.5" y="130.75" id="svg_40" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" stroke="null">account:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="534.5" y="168" id="svg_41" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">amount:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="783.5" y="130.75" id="svg_43" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">account:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="784.5" y="168" id="svg_44" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">amount:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="1052.50107" y="120.76357" id="svg_45" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">from:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="1066.50088" y="152.24873" id="svg_46" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">to:</text>
+   <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="1035.50088" y="183.50137" id="svg_47" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">amount:</text>
   </g>
  </g>
 

@@ -1,5 +1,5 @@
 {
-    "model": "model/phonebook.mch",
+    "model": "model/Bank.mch",
     "id": "phonebook",
     "name": "Interactive Phonebook",
     "observers": "phonebook.observers.json",
