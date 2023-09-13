@@ -40,7 +40,7 @@
    <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="590.50781" y="101" id="svg_23" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Deposit</text>
    <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="829.51563" y="100" id="svg_25" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Withdraw</text>
    <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="1084.48438" y="102" id="svg_26" font-size="24" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" font-weight="bold">Transfer</text>
-   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." id="cpf_deposit">
+   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." data-btype="STRING" id="cpf_deposit">
     <rect id="svg_19" x="584.5" y="114.25" width="124" height="25" fill="white" stroke="black"/>
     <text id="svg_27" x="586.5" y="132.25" fill="lightgray">Enter CPF here...</text>
    </g>
@@ -60,7 +60,7 @@
     <rect id="svg_52" x="584.5" y="151.5" width="100" height="25" fill="white" stroke="black"/>
     <text id="svg_53" x="586.5" y="169.5" fill="lightgray">Amount...</text>
    </g>
-   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." data-btype="INTEGER" id="account_withdraw">
+   <g data-bms-widget="iinput" data-placeholder="Enter CPF here..." data-btype="STRING" id="cpf_withdraw">
     <rect id="svg_54" x="833.5" y="114.25" width="124" height="25" fill="white" stroke="black"/>
     <text id="svg_55" x="835.5" y="132.25" fill="lightgray">Enter CPF here...</text>
    </g>
@@ -68,17 +68,17 @@
     <rect id="svg_56" x="833.5" y="151.5" width="100" height="25" fill="white" stroke="black"/>
     <text id="svg_57" x="835.5" y="169.5" fill="lightgray">Amount...</text>
    </g>
-   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="from_transfer">
-    <rect id="svg_58" x="1086.9944" y="104.24902" width="100" height="25" fill="white" stroke="black"/>
-    <text id="svg_59" x="1088.9944" y="122.24902" fill="lightgray">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Origin account" data-btype="STRING" id="from_transfer">
+    <rect id="svg_58" x="1086.9944" y="104.24902" width="113" height="25" fill="white" stroke="black"/>
+    <text id="svg_59" x="1088.9944" y="122.24902" fill="lightgray">Origin account</text>
    </g>
-   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="to_transfer">
-    <rect id="svg_60" x="1086.99449" y="135.74873" width="100" height="25" fill="white" stroke="black"/>
-    <text id="svg_61" x="1088.99449" y="153.74873" fill="lightgray">Placeholder</text>
+   <g data-bms-widget="iinput" data-placeholder="Destination account" data-btype="STRING" id="to_transfer">
+    <rect id="svg_60" x="1086.99449" y="135.74873" width="154" height="25" fill="white" stroke="black"/>
+    <text id="svg_61" x="1088.99449" y="153.74873" fill="lightgray">Destination account</text>
    </g>
-   <g data-bms-widget="iinput" data-placeholder="Placeholder" data-btype="INTEGER" id="amount_transfer">
+   <g data-bms-widget="iinput" data-placeholder="Amount..." data-btype="INTEGER" id="amount_transfer">
     <rect id="svg_62" x="1086.99445" y="167.00137" width="100" height="25" fill="white" stroke="black"/>
-    <text id="svg_63" x="1088.99445" y="185.00137" fill="lightgray">Placeholder</text>
+    <text id="svg_63" x="1088.99445" y="185.00137" fill="lightgray">Amount...</text>
    </g>
    <text fill="#000000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="532.5" y="130.75" id="svg_40" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve" stroke="null">account:</text>
    <text fill="#000000" stroke="black" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="534.5" y="168" id="svg_41" font-size="12" font-family="Helvetica, Arial, sans-serif" text-anchor="left" xml:space="preserve">amount:</text>

@@ -1,0 +1,139 @@
+{
+    "events": [
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "new account",
+                        "predicate": "var cpf = container.find(\"#cpf_signup\");\nreturn \"cpf = \" + cpf.val()",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully added to the bank system!\");",
+                "selector": "#create_btn"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "new dependent",
+                        "predicate": "var holder = container.find(\"#cpf_holder_nd\");\nvar dependent = container.find(\"#cpf_dependent_nd\")\nreturn \"holder = \" + holder.val() + \" & dependent = \" + dependent.val()",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully added dependent!\");",
+                "selector": "#dependent_btn"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "deposit",
+                        "predicate": "var cpf = container.find(\"#cpf_deposit\");\nvar amount = container.find(\"#amount_deposit\")\nreturn \"cpf = \" + cpf.val() + \" & amount = \" + amount.val()",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully deposited!\");",
+                "selector": "#deposit_btn"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "withdraw",
+                        "predicate": "var cpf = container.find(\"#cpf_withdraw\");\nvar amount = container.find(\"#amount_withdraw\")\nreturn \"cpf = \" + cpf.val() + \" & amount = \" + amount.val()",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully withdrawed!\");",
+                "selector": "#withdraw_btn"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "transfer",
+                        "predicate": "var from = container.find(\"#from_transfer\");\nvar to = container.find(\"#to_transfer\")\nvar amount = container.find(\"#amount_transfer\")\nreturn \"from = \" + from.val() + \" & to = \" + to.val() + \" & amount = \" + amount.val()",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully transfered!\");",
+                "selector": "#transfer_btn"
+            }
+        },
+
+
+
+
+        
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "add",
+                        "predicate": "var name = container.find(\"#name\");\nvar nr = container.find(\"#nr\"); \nreturn \"name = \" + name.val() + \" & nr = \" + nr.val();",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "\n                var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n                return '<span>' + event.name + predicateStr + '</span>';\n              ",
+                "callback": "alert(data.predicate + \" successfully added to phonebook!\");",
+                "selector": "#bt_add"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "lookup",
+                        "predicate": "return \"name = \" + container.find(\"#nnsearch\").val();",
+                        "predicateJs": true
+                    }
+                ],
+                "tooltip": true,
+                "label": "if(event.canExecute) {\n  return '<span>Search for ' + event.predicate + ' in phonebook.</span>';\n} else {\n  return '<span>' + event.predicate + ' not in phonebook.</span>';\n}\n\n",
+                "callback": "alert(\"Number of \" + data.predicate + \" is: \" + data.returnValues[0]);",
+                "selector": "#bt_search"
+            }
+        },
+        {
+            "type": "executeEvent",
+            "data": {
+                "events": [
+                    {
+                        "name": "lock",
+                        "predicate": ""
+                    },
+                    {
+                        "name": "unlock",
+                        "predicate": ""
+                    }
+                ],
+                "tooltip": true,
+                "selector": "#lock",
+                "label": "              var predicateStr = event.predicate ? '(' + event.predicate + ')' : '';\n              return '<span>' + event.name + predicateStr + '</span>';"
+            }
+        }
+    ]
+}

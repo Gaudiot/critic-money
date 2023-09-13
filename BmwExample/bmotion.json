@@ -1,11 +1,11 @@
 {
     "model": "model/Bank.mch",
-    "id": "phonebook",
-    "name": "Interactive Phonebook",
-    "observers": "phonebook.observers.json",
-    "events": "phonebook.events.json",
+    "id": "bank",
+    "name": "Interactive Bank",
+    "observers": "bank.observers.json",
+    "events": "bank.events.json",
     "autoOpen": [
-	"UserInteractions",
+      	"UserInteractions",
         "Events",
         "StateInspector"
     ],

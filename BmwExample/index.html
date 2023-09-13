@@ -19,11 +19,11 @@
   <div data-bms-svg="visualization.svg"></div>
   <table class="table" ng-controller="pCtrl">
     <tr>
-      <th>Name</th>
-      <th>Number</th>
-      <th>Active</th>
+      <th>Holder</th>
+      <th>Dependents</th>
+      <th>Balance</th>
     </tr>
-    <tr ng-repeat="el in db">
+    <tr ng-repeat="el in CLIENTS">
       <td>
         {{el[0]}}
       </td>
@@ -33,8 +33,15 @@
         </span>
       </td>
       <td>
+        <span editable-text="el[1]" onaftersave="update(el[0], $data)">
+          {{el[2]}}
+        </span>
+      </td>
+      <!--
+      <td>
         <span id="toggle({{el[0]}})" execute-event name="toggle" predicate='name="{{el[0]}}"' ng-class="isActive(el[0]) ? 'glyphicon glyphicon-ok activated' : 'glyphicon glyphicon-remove deactivated'"></span>
       </td>
+      -->
     </tr>
   </table>
 
