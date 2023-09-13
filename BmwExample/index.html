@@ -20,21 +20,24 @@
   <table class="table" ng-controller="pCtrl">
     <tr>
       <th>Holder</th>
-      <!--
-      <th>Dependents</th>
       <th>Balance</th>
-      -->
+      <th>Dependents</th>
     </tr>
-    <tr ng-repeat="el in CLIENTS">
+    <tr ng-repeat="el in clients">
       <td>
         {{el[0]}}
       </td>
-      <!--
       <td>
-        <span editable-text="el[1]" onaftersave="update(el[0], $data)">
-          {{el[1]}}
+        <span>
+          {{el[1]['balance']}}
         </span>
       </td>
+      <td>
+        <span>
+          {{el[1]['dependents']}}
+        </span>
+      </td>
+      <!--
       <td>
         <span editable-text="el[1]" onaftersave="update(el[0], $data)">
           {{el[2]}}
