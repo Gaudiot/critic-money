@@ -5,8 +5,8 @@
             "data": {
                 "events": [
                     {
-                        "name": "new account",
-                        "predicate": "var cpf = container.find(\"#cpf_signup\");\nreturn \"cpf = \" + cpf.val()",
+                        "name": "register_new_account",
+                        "predicate": "var cpf = container.find(\"#cpf_signup\").val();\nreturn \"cpf = \" + cpf",
                         "predicateJs": true
                     }
                 ],
@@ -21,8 +21,8 @@
             "data": {
                 "events": [
                     {
-                        "name": "new dependent",
-                        "predicate": "var holder = container.find(\"#cpf_holder_nd\");\nvar dependent = container.find(\"#cpf_dependent_nd\")\nreturn \"holder = \" + holder.val() + \" & dependent = \" + dependent.val()",
+                        "name": "register_as_dependent",
+                        "predicate": "var holder = container.find(\"#cpf_holder_nd\").val();\nvar dependent = container.find(\"#cpf_dependent_nd\").val()\nreturn \"holder = \" + holder + \" & dependent = \" + dependent",
                         "predicateJs": true
                     }
                 ],
@@ -38,7 +38,7 @@
                 "events": [
                     {
                         "name": "deposit",
-                        "predicate": "var cpf = container.find(\"#cpf_deposit\");\nvar amount = container.find(\"#amount_deposit\")\nreturn \"cpf = \" + cpf.val() + \" & amount = \" + amount.val()",
+                        "predicate": "var client = container.find(\"#cpf_deposit\").val();\nvar amount = container.find(\"#amount_deposit\").val()\nreturn \"client = \" + client + \" & amount = \" + amount",
                         "predicateJs": true
                     }
                 ],
@@ -54,7 +54,7 @@
                 "events": [
                     {
                         "name": "withdraw",
-                        "predicate": "var cpf = container.find(\"#cpf_withdraw\");\nvar amount = container.find(\"#amount_withdraw\")\nreturn \"cpf = \" + cpf.val() + \" & amount = \" + amount.val()",
+                        "predicate": "var client = container.find(\"#cpf_withdraw\").val();\nvar amount = container.find(\"#amount_withdraw\").val()\nreturn \"client = \" + client + \" & amount = \" + amount",
                         "predicateJs": true
                     }
                 ],
@@ -70,7 +70,7 @@
                 "events": [
                     {
                         "name": "transfer",
-                        "predicate": "var from = container.find(\"#from_transfer\");\nvar to = container.find(\"#to_transfer\")\nvar amount = container.find(\"#amount_transfer\")\nreturn \"from = \" + from.val() + \" & to = \" + to.val() + \" & amount = \" + amount.val()",
+                        "predicate": "var clientSender = container.find(\"#from_transfer\").val();\nvar clientReceiver = container.find(\"#to_transfer\").val()\nvar amount = container.find(\"#amount_transfer\").val()\nreturn \"clientSender = \" + clientSender + \" & clientReceiver = \" + clientReceiver + \" & amount = \" + amount",
                         "predicateJs": true
                     }
                 ],
