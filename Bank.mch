@@ -1,9 +1,10 @@
-/* Bank
- * Author: Victor Gaudiot & Matheus Isidoro
- * Creation date: 05/09/23
+/* bank2
+ * Author: User
+ * Creation date: 25/09/2023
  */
 MACHINE
     Bank
+    
 SETS
     CPFS
 CONSTANTS
@@ -20,7 +21,7 @@ INVARIANT
 INITIALISATION
     CLIENTS := {}
     
-OPERATIONS    
+OPERATIONS
     register_new_account(cpf) =
     PRE
         cpf : CPFS &
@@ -35,10 +36,7 @@ OPERATIONS
             XX : FIN(CPFS) &
             XX = {} 
         THEN
-            CLIENTS := CLIENTS <+
-                {
-                    cpf |-> rec(dependents: XX, balance: 0.0)
-                }
+            CLIENTS := CLIENTS \/ { cpf |-> rec(dependents: XX, balance: 0.0) }
         END
     END;
     
@@ -59,14 +57,14 @@ OPERATIONS
             XX = (CLIENTS(holder))'dependents \/ {dependent} &
             YY = (CLIENTS(holder))'balance
         THEN
-            CLIENTS := CLIENTS <+ {
+            CLIENTS := CLIENTS \/ {
                 holder |-> rec(
                     dependents: XX,
                     balance: YY
                 )
             }
         END
-    END; 
+    END;
     
     withdraw(client, amount) =
     PRE
@@ -138,6 +136,36 @@ OPERATIONS
                     holderReceiver |-> YY
                 }
         END
-    END
-END
+    END;
 
+    cc <-- check_balance(client) =
+    PRE
+        client: CPFS & 
+        client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))}
+    THEN
+        ANY holder WHERE
+            holder: {hh | hh: dom(CLIENTS) & (client = hh or client: (CLIENTS(hh))'dependents)}
+        THEN
+            cc := CLIENTS(holder)
+        END
+    END;
+
+    remove_client(client) =
+    PRE
+        client: CPFS &
+        client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))}
+    THEN
+        IF client: dom(CLIENTS) THEN
+            CLIENTS := {client} <<| CLIENTS
+        ELSE
+            ANY holder WHERE
+                holder: {hh | hh: dom(CLIENTS) & client: (CLIENTS(hh))'dependents}
+            THEN
+                CLIENTS(holder) := rec(
+                    dependents: (CLIENTS(holder))'dependents - {client},
+                    balance: (CLIENTS(holder))'balance
+                )
+            END
+        END
+    END    
+END
