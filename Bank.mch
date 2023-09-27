@@ -57,7 +57,7 @@ OPERATIONS
             XX = (CLIENTS(holder))'dependents \/ {dependent} &
             YY = (CLIENTS(holder))'balance
         THEN
-            CLIENTS := CLIENTS \/ {
+            CLIENTS := CLIENTS <+ {
                 holder |-> rec(
                     dependents: XX,
                     balance: YY
