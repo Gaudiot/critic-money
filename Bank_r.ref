@@ -11,11 +11,8 @@ VARIABLES
     ClientHolder
 INVARIANT
     ClientBalance: CPFS >+> REAL &
-    ClientHolder: CPFS >+> CPFS &
-    dom(ClientBalance) = ran(ClientHolder) &
-    dom(ClientBalance) = dom(CLIENTS) &
-    ran(ClientHolder) = dom(CLIENTS)
-
+    ClientHolder: CPFS >+> dom(ClientBalance) &
+    dom(ClientBalance) = dom(CLIENTS)
 INITIALISATION
     ClientBalance := {} ||
     ClientHolder := {}
@@ -24,91 +21,94 @@ INITIALISATION
 OPERATIONS
     register_new_account(cpf) =
     PRE
-        cpf /: ran(ClientHolder)
+        cpf /: ran(ClientHolder) &
+        cpf /: dom(ClientBalance)
     THEN
-        ClientBalance(cpf) := 0.0 ||
-        ClientHolder := {}
+        ClientBalance(cpf) := 0.0
     END;
 
     
     register_as_dependent(holder, dependent) =
     PRE
-        holder : dom(ClientHolder) &
-        dependent /: dom(ClientHolder) &
-        dependent /: ran(ClientHolder)
+        (holder : ran(ClientHolder) or holder : dom(ClientBalance)) &
+        dependent /: ran(ClientHolder) &
+        dependent /: dom(ClientHolder)
     THEN
-        ClientHolder(holder) := ClientHolder(holder) \/ {dependent}
+        ClientHolder := ClientHolder <+ {
+            dependent |-> holder
+        }
     END;
 
+    remove_client(holder) =
+    BEGIN
+        ClientHolder := ClientHolder |>> {holder}||
+        ClientBalance := {holder} <<| ClientBalance  
+    END;
+    
+    remove_dependent(dependent) =
+    BEGIN
+        ClientHolder := {dependent} <<| ClientHolder
+    END;
     
     withdraw(client, amount) =
     PRE
-        (# holder . (holder: dom(ClientHolder) & (client = holder or client: ClientHolder(holder) & ClientBalance(holder) >= amount)))
+        (# holder . (holder : dom(ClientBalance) & (client = holder or ClientHolder(client) = holder & ClientBalance(holder) >= amount)))
     THEN
-        IF client: dom(ClientHolder) THEN
+        IF client: dom(ClientBalance) THEN
             ClientBalance(client) := ClientBalance(client) - amount
         ELSE
-            ClientBalance(ClientHolder(client)) := ClientBalance(ClientHolder(client)) - amount
+            ClientBalance(ClientHolder~(client)) := ClientBalance(ClientHolder~(client)) - amount
         END
     END;
 
     
     deposit(client, amount) =
     BEGIN
-        IF client: dom(ClientHolder) THEN
+        IF client: dom(ClientBalance) THEN
             ClientBalance(client) := ClientBalance(client) + amount
         ELSE
-            ClientBalance(ClientHolder~(client)) := ClientBalance(ClientHolder~(client)) + amount
+            ClientBalance(ClientHolder(client)) := ClientBalance(ClientHolder(client)) + amount
         END
     END;
-
     
     transfer(clientSender, clientReceiver, amount) =
     PRE
-        (# holder . (holder: dom(ClientHolder) & (clientSender = holder or clientSender: ClientHolder(holder) & ClientBalance(holder) >= amount)))
+        (# holder . (holder : dom(ClientBalance) & (clientSender = holder or ClientHolder(clientSender) = holder & ClientBalance(holder) >= amount)))
     THEN
         IF clientSender: dom(ClientBalance) THEN
             IF clientReceiver: dom(ClientBalance) THEN
-                ClientBalance(clientSender) := ClientBalance(clientSender) - amount ||
-                ClientBalance(clientReceiver) := ClientBalance(clientReceiver) + amount
+                ClientBalance := ClientBalance <+ {
+                        clientSender |-> ClientBalance(clientSender) - amount,
+                        clientReceiver |-> ClientBalance(clientReceiver) + amount
+                    }
             ELSE
-                ClientBalance(clientSender) := ClientBalance(clientSender) - amount ||
-                ClientBalance(ClientHolder~(clientReceiver)) := ClientBalance(ClientHolder~(clientReceiver)) + amount
+                ClientBalance := ClientBalance <+ {
+                        clientSender |-> ClientBalance(clientSender) - amount,
+                        ClientHolder(clientReceiver) |-> ClientBalance(ClientHolder(clientReceiver)) + amount
+                    }
             END
         ELSE
             IF clientReceiver: dom(ClientBalance) THEN
-                ClientBalance(ClientHolder~(clientSender)) := ClientBalance(ClientHolder~(clientSender)) - amount ||
-                ClientBalance(clientReceiver) := ClientBalance(clientReceiver) + amount
+                ClientBalance := ClientBalance <+ {
+                        ClientHolder(clientSender) |-> ClientBalance(ClientHolder(clientSender)) - amount,
+                        clientReceiver |-> ClientBalance(clientReceiver) + amount
+                    }
             ELSE
-                ClientBalance(ClientHolder~(clientSender)) := ClientBalance(ClientHolder~(clientSender)) - amount ||
-                ClientBalance(ClientHolder~(clientReceiver)) := ClientBalance(ClientHolder~(clientReceiver)) + amount
+                ClientBalance := ClientBalance <+ {
+                        ClientHolder(clientSender) |-> ClientBalance(ClientHolder(clientSender)) - amount,
+                        ClientHolder(clientReceiver) |-> ClientBalance(ClientHolder(clientReceiver)) + amount
+                    }
             END
         END
     END;
 
-
     cc <-- check_balance(client) =
     BEGIN
-        IF client: dom(ClientHolder) THEN
+        IF client: dom(ClientBalance) THEN
             cc := ClientBalance(client)
         ELSE
-            cc := ClientBalance(ClientHolder~(client))
+            cc := ClientBalance(ClientHolder(client))
         END
-    END;
-
-    remove_client(client) =
-    BEGIN
-        IF client: dom(ClientHolder) THEN
-            ClientHolder := {client} <<| ClientHolder ||
-            ClientBalance := {client} <<| ClientBalance
-        ELSE
-            ClientHolder(ClientHolder~(client)) := ClientHolder(ClientHolder~(client)) - {client}
-        END
-    END;
-    
-    remove_dependent(dependent) =
-    BEGIN
-        ClientHolder(ClientHolder~(dependent)) := ClientHolder(ClientHolder~(dependent)) - {dependent}
     END
-
-END
+    
+ END
