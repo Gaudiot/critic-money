@@ -146,7 +146,7 @@ OPERATIONS
         ANY holder WHERE
             holder: {hh | hh: dom(CLIENTS) & (client = hh or client: (CLIENTS(hh))'dependents)}
         THEN
-            cc := CLIENTS(holder)
+            cc := (CLIENTS(holder))'balance
         END
     END;
 
