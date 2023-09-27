@@ -86,7 +86,7 @@ OPERATIONS
                 balance: (CLIENTS(holder))'balance
             )
         END
-    END 
+    END;
     
     withdraw(client, amount) =
     PRE
@@ -159,7 +159,7 @@ OPERATIONS
                 }
         END
     END;
-
+    
     cc <-- check_balance(client) =
     PRE
         client: CPFS & 
@@ -170,30 +170,5 @@ OPERATIONS
         THEN
             cc := (CLIENTS(holder))'balance
         END
-    END;
-    register_as_dependent(holder, dependent) =
-    PRE
-        holder : dom(CLIENTS) &
-        dependent : CPFS &
-        dependent /: dom(CLIENTS) &
-        dependent /: union(
-            { 
-                all_dependents | all_dependents : FIN(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
-            }
-        )
-    THEN
-        ANY XX, YY WHERE
-            XX : FIN(CPFS) &
-            YY : REAL &
-            XX = (CLIENTS(holder))'dependents \/ {dependent} &
-            YY = (CLIENTS(holder))'balance
-        THEN
-            CLIENTS := CLIENTS <+ {
-                holder |-> rec(
-                    dependents: XX,
-                    balance: YY
-                )
-            }
-        END
-    END  
+    END
 END

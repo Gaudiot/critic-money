@@ -11,8 +11,9 @@ VARIABLES
     ClientHolder
 INVARIANT
     ClientBalance: CPFS >+> REAL &
-    ClientHolder: CPFS >+> dom(ClientBalance) &
-    dom(ClientBalance) = dom(CLIENTS)
+    ClientHolder: CPFS +->> dom(ClientBalance) &
+    dom(ClientBalance) = dom(CLIENTS) &
+    (! holder . (holder: dom(ClientBalance) => ClientBalance(holder) = (CLIENTS(holder))'balance))
 INITIALISATION
     ClientBalance := {} ||
     ClientHolder := {}
@@ -21,7 +22,7 @@ INITIALISATION
 OPERATIONS
     register_new_account(cpf) =
     PRE
-        cpf /: ran(ClientHolder) &
+        cpf /: dom(ClientHolder) &
         cpf /: dom(ClientBalance)
     THEN
         ClientBalance(cpf) := 0.0
@@ -110,5 +111,4 @@ OPERATIONS
             cc := ClientBalance(ClientHolder(client))
         END
     END
-    
  END
