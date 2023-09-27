@@ -66,6 +66,28 @@ OPERATIONS
         END
     END;
     
+    remove_client(holder) =
+    PRE
+        holder: dom(CLIENTS)
+    THEN
+        CLIENTS := {holder} <<| CLIENTS
+    END;
+    
+    remove_dependent(dependent) =
+    PRE
+        dependent: CPFS &
+        dependent: {cpf | cpf : CPFS & (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents))}
+    THEN
+        ANY holder WHERE
+            holder: {hh | hh: dom(CLIENTS) & dependent: (CLIENTS(hh))'dependents}
+        THEN
+            CLIENTS(holder) := rec(
+                dependents: (CLIENTS(holder))'dependents - {dependent},
+                balance: (CLIENTS(holder))'balance
+            )
+        END
+    END 
+    
     withdraw(client, amount) =
     PRE
         client: CPFS &
@@ -149,23 +171,29 @@ OPERATIONS
             cc := (CLIENTS(holder))'balance
         END
     END;
-
-    remove_client(client) =
+    register_as_dependent(holder, dependent) =
     PRE
-        client: CPFS &
-        client: {cpf | cpf : CPFS & (cpf: dom(CLIENTS) or (#cpf_ . (cpf_ : dom(CLIENTS) & cpf: (CLIENTS(cpf_))'dependents)))}
+        holder : dom(CLIENTS) &
+        dependent : CPFS &
+        dependent /: dom(CLIENTS) &
+        dependent /: union(
+            { 
+                all_dependents | all_dependents : FIN(CPFS) & ( # cpf_ . (cpf_ : dom(CLIENTS) & (CLIENTS(cpf_))'dependents = all_dependents))
+            }
+        )
     THEN
-        IF client: dom(CLIENTS) THEN
-            CLIENTS := {client} <<| CLIENTS
-        ELSE
-            ANY holder WHERE
-                holder: {hh | hh: dom(CLIENTS) & client: (CLIENTS(hh))'dependents}
-            THEN
-                CLIENTS(holder) := rec(
-                    dependents: (CLIENTS(holder))'dependents - {client},
-                    balance: (CLIENTS(holder))'balance
+        ANY XX, YY WHERE
+            XX : FIN(CPFS) &
+            YY : REAL &
+            XX = (CLIENTS(holder))'dependents \/ {dependent} &
+            YY = (CLIENTS(holder))'balance
+        THEN
+            CLIENTS := CLIENTS <+ {
+                holder |-> rec(
+                    dependents: XX,
+                    balance: YY
                 )
-            END
+            }
         END
-    END    
+    END  
 END
